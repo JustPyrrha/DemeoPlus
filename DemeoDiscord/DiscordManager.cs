@@ -17,6 +17,7 @@ namespace DemeoDiscord
             MelonLogger.Msg($"(Discord|INFO): Starting RPC Client.");
             _discord = new DiscordApp.Discord(844058872573722674, (ulong) Discord.CreateFlags.Default);
             _discord.SetLogHook(DiscordApp.LogLevel.Debug, (level, message) => MelonLogger.Msg($"(Discord|{level}): {message}"));
+            _discord.GetActivityManager().RegisterSteam(1484280);
 
             _activity = new DiscordApp.Activity
             {
