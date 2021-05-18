@@ -11,7 +11,7 @@ DemeoDiscord depends on MelonLoader v0.3, available [here](https://github.com/La
 
 1. Go to the releases tab and download the `DemeoDiscord-v{VERSION}.zip` file from the latest release.
 2. Extract everything from the zip into the root directory of Demeo.\
-    Make sure the `discord_game_sdk.dll` file is in the same folder `demeo.exe` file.
+    Make sure the `discord_game_sdk.dll` file is in the same folder as the `demeo.exe` file.
 3. Profit.
 
 ## Planned Features
