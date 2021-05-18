@@ -33,7 +33,6 @@ namespace DemeoDiscord
             };
             _discord?.GetActivityManager().UpdateActivity(_activity, result => MelonLogger.Msg($"(Discord|INFO): Setting Activity. ({result})"));
 
-            SceneManager.activeSceneChanged += HandleSceneChange;
             SceneManager.sceneUnloaded += SceneManagerOnSceneUnloaded;
         }
 
@@ -60,9 +59,8 @@ namespace DemeoDiscord
             }
         }
 
-        public void HandleSceneChange(Scene oldScene, Scene newScene)
+        public void HandleSceneChange(string sceneName)
         {
-            var sceneName = newScene.name;
             MelonLogger.Msg($"(Unity|INFO): Active Scene changed. (\"{sceneName}\")");
             switch (sceneName)
             {

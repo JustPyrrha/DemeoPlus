@@ -11,6 +11,11 @@ namespace DemeoDiscord
             _discord.Init();
         }
 
+        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+        {
+            _discord.HandleSceneChange(sceneName);
+        }
+
         public override void OnApplicationQuit()
         {
             _discord.Dispose();
