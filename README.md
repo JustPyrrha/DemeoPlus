@@ -15,7 +15,8 @@ DemeoDiscord depends on MelonLoader v0.3, available [here](https://github.com/La
 3. Profit.
 
 ## Planned Features
-1. Display party member count/max.
+ * Display party member count/max.
+ * Allow game invites via Discord.
 
 ## Support
 For support, ping `@JoeZwet#0001` in the [Demeo Modding Group Discord server](https://discord.gg/XYphVbfaqh).
