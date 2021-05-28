@@ -20,3 +20,15 @@ DemeoDiscord depends on MelonLoader v0.3, available [here](https://github.com/La
 
 ## Support
 For support, ping `@JoeZwet#0001` in the [Demeo Modding Group Discord server](https://discord.gg/XYphVbfaqh).
+
+## Developers
+If you are wanting to develop features for DemeoDiscord you will need to create a `DemeoDiscord/DemeoDiscord.csproj.user` file with the following xml:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Set "YOUR OWN" Demeo folder here to resolve most of the dependency paths! -->
+    <DemeoDir>C:\Program Files (x86)\Steam\steamapps\common\Demeo</DemeoDir>
+  </PropertyGroup>
+</Project>
+```
