@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Reflection;
+using Boardgame;
+using Boardgame.Networking;
 using DemeoDiscord.Utilities;
 using MelonLoader;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DiscordApp = Discord;
+using Object = UnityEngine.Object;
 
 namespace DemeoDiscord
 {
@@ -11,6 +15,7 @@ namespace DemeoDiscord
     {
         private DiscordApp.Discord _discord;
         private DiscordApp.Activity _activity;
+        private INetworkController _networkController;
 
         public void Init()
         {
@@ -18,7 +23,8 @@ namespace DemeoDiscord
             _discord = new DiscordApp.Discord(844058872573722674, (ulong) Discord.CreateFlags.Default);
             _discord.SetLogHook(DiscordApp.LogLevel.Debug, (level, message) => MelonLogger.Msg($"(Discord|{level}): {message}"));
             _discord.GetActivityManager().RegisterSteam(1484280);
-
+            _discord.GetActivityManager().OnActivityJoin += secret => PhotonNetwork.JoinRoom(secret);
+            
             _activity = new DiscordApp.Activity
             {
                 Details = "Loading...",
@@ -65,9 +71,9 @@ namespace DemeoDiscord
             MelonLogger.Msg($"(Unity|INFO): Active Scene changed. (\"{sceneName}\")");
             switch (sceneName)
             {
-                // Even though we have SceneManagerOnSceneUnloaded keeping this here for if its ever changed.
                 case SceneNames.Home:
                 {
+                    DetectNetworking();
                     _activity.Details = "On the Main Menu";
                     _activity.State = "Waiting...";
                     _activity.Assets.LargeImage = "logo";
@@ -77,6 +83,11 @@ namespace DemeoDiscord
                     {
                         Start = DateTimeOffset.Now.ToUnixTimeSeconds()
                     };
+                    if (ModConfigManager.ModConfig.EnableExperimentalFeatures)
+                    {
+                        _activity.Secrets = new DiscordApp.ActivitySecrets();
+                        _activity.Party = new DiscordApp.ActivityParty();
+                    }
                     break;
                 }
                 case SceneNames.Lobby:
@@ -87,6 +98,27 @@ namespace DemeoDiscord
                     {
                         Start = DateTimeOffset.Now.ToUnixTimeSeconds()
                     };
+                    
+                    if (_networkController != null)
+                    {
+                        _activity.Party = new DiscordApp.ActivityParty
+                        {
+                            Id = PhotonNetwork.room.Name + "_party",
+                            Size = new DiscordApp.PartySize
+                            {
+                                MaxSize = 4,
+                                CurrentSize = PhotonNetwork.playerList.Length
+                            }
+                        };
+                        if (ModConfigManager.ModConfig.EnableExperimentalFeatures)
+                        {
+                            _activity.Secrets = new DiscordApp.ActivitySecrets
+                            {
+                                Join = PhotonNetwork.room.Name, // use just the room code for the join secret
+                                Match = PhotonNetwork.room.Name + "_match",
+                            };
+                        }
+                    }
                     break;
                 }
                 default:
@@ -106,12 +138,42 @@ namespace DemeoDiscord
                         _activity.Assets.LargeText = "Book 1 - The Black Sarcophagus";
                         _activity.Assets.SmallImage = "logo";
                         _activity.Assets.SmallText = $"v{Application.version} (Unity: v{Application.unityVersion})";
+                        if (_networkController != null)
+                        {
+                            _activity.Party = new DiscordApp.ActivityParty
+                            {
+                                Id = PhotonNetwork.room.Name + "_party",
+                                Size = new DiscordApp.PartySize
+                                {
+                                    MaxSize = 4,
+                                    CurrentSize = PhotonNetwork.playerList.Length
+                                }
+                            };
+                            if (ModConfigManager.ModConfig.EnableExperimentalFeatures)
+                            {
+                                _activity.Secrets = new DiscordApp.ActivitySecrets
+                                {
+                                    Join = PhotonNetwork.room.Name, // use just the room code for the join secret
+                                    Match = PhotonNetwork.room.Name + "_match",
+                                };
+                            }
+                        }
                     }
                     break;
                 }
             }
             
             _discord?.GetActivityManager().UpdateActivity(_activity, result => MelonLogger.Msg($"(Discord|INFO): Setting Activity. ({result})"));
+        }
+
+        private void DetectNetworking()
+        {
+            if(this._networkController != null) return;
+            var gameStartupObj = Object.FindObjectOfType<GameStartup>();
+            if (gameStartupObj is null) return;
+            var gameContext = (GameContext) typeof (GameStartup).GetField("gameContext", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(gameStartupObj);
+            this._networkController = gameContext.networkController;
+            MelonLogger.Msg($"(Mod|INFO): Found Photon Network. (Account ID: {PlayerHub.GetAccountIDForPlayer(_networkController.Player.ID)})");
         }
 
         public void RunCallbacks()

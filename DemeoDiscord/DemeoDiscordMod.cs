@@ -1,4 +1,6 @@
 ﻿using MelonLoader;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DemeoDiscord
 {
@@ -8,6 +10,7 @@ namespace DemeoDiscord
         
         public override void OnApplicationStart()
         {
+            ModConfigManager.Register();
             _discord.Init();
         }
 
