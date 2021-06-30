@@ -27,7 +27,7 @@ namespace DemeoPlus.Desktop.Discord
                 _discord = new DiscordApp.Discord(844058872573722674, (ulong) DiscordApp.CreateFlags.Default);
                 _discord.SetLogHook(DiscordApp.LogLevel.Debug, (level, message) => MelonLogger.Msg($"(Discord|{level}): {message}"));
                 _discord.GetActivityManager().RegisterSteam(1484280);
-                _discord.GetActivityManager().OnActivityJoin += secret => PhotonNetwork.JoinRoom(secret);
+                
             
                 _activity = new DiscordApp.Activity
                 {
@@ -77,14 +77,17 @@ namespace DemeoPlus.Desktop.Discord
                     DetectNetworking();
                     _activity.Details = "On the Main Menu";
                     _activity.State = "Waiting...";
-                    _activity.Assets.LargeImage = "logo";
-                    _activity.Assets.LargeText = $"v{Application.version} (Unity: v{Application.unityVersion})";
+                    _activity.Assets = new DiscordApp.ActivityAssets
+                    {
+                        LargeImage = "logo",
+                        LargeText = $"v{Application.version} (Unity: v{Application.unityVersion})"
+                    };
                     
                     _activity.Timestamps = new DiscordApp.ActivityTimestamps
                     {
                         Start = DateTimeOffset.Now.ToUnixTimeSeconds()
                     };
-                    if (DiscordConfig.Instance.DevOnly_EnableJoins)
+                    if (DiscordConfig.Instance.ShowParty || DiscordConfig.Instance.DevOnly_EnableJoins)
                     {
                         _activity.Secrets = new DiscordApp.ActivitySecrets();
                         _activity.Party = new DiscordApp.ActivityParty();
@@ -181,7 +184,7 @@ namespace DemeoPlus.Desktop.Discord
                 }
             }
             
-            _discord?.GetActivityManager().UpdateActivity(_activity, result => MelonLogger.Msg($"(Discord|INFO): (Scene Change) Setting Activity. ({result})"));
+            _discord?.GetActivityManager().UpdateActivity(_activity, result => MelonLogger.Msg($"(Discord|INFO): Setting Activity. ({result})"));
         }
 
         private void DetectNetworking()
@@ -191,7 +194,14 @@ namespace DemeoPlus.Desktop.Discord
             if (gameStartupObj is null) return;
             _context = (GameContext) typeof (GameStartup).GetField("gameContext", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(gameStartupObj);
             this._networkController = _context.networkController;
-            MelonLogger.Msg($"(Mod|INFO): Found Photon Network. (Account ID: {PlayerHub.GetAccountIDForPlayer(_networkController.Player.ID)})");
+            MelonLogger.Msg(
+                $"(Mod|INFO): Found Photon Network. (Account ID: {PlayerHub.GetAccountIDForPlayer(_networkController.Player.ID)})");
+            if (DiscordConfig.Instance.DevOnly_EnableJoins)
+            {
+                _discord.GetActivityManager().OnActivityJoin += secret => _context.gameStateMachine?.JoinGame(null,
+                    secret, s => MelonLogger.Msg("(Discord|INFO): Joining via Discord"),
+                    () => MelonLogger.Warning("(Discord|WARN): Failed to join through Discord."));
+            }
         }
 
         public void RunCallbacks()
