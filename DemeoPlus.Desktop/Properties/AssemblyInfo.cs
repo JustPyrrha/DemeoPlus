@@ -16,7 +16,7 @@ using MelonLoader;
 [assembly: AssemblyCulture("")]
 
 // Melon
-[assembly: MelonInfo(typeof(DemeoPlusDesktop), "DemeoPlus.Desktop", "0.3.0-beta+demeo.1.3", "JoeZwet")]
+[assembly: MelonInfo(typeof(DemeoPlusDesktop), "DemeoPlus.Desktop", "0.4.0", "JoeZwet")]
 [assembly: MelonGame("Resolution Games", "Demeo")]
 [assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.WINDOWS_X64)]
 [assembly: MelonGameVersion("1.4.118643")]
