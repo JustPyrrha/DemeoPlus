@@ -19,6 +19,7 @@ using MelonLoader;
 [assembly: MelonInfo(typeof(DemeoPlusCore), "DemeoPlus", "0.3.0-beta+demeo.1.3", "JoeZwet")]
 [assembly: MelonGame("Resolution Games", "Demeo")]
 [assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.UNIVERSAL)]
+[assembly: MelonGameVersion("1.4.118643")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
