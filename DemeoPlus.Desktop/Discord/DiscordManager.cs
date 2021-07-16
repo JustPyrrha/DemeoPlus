@@ -5,6 +5,7 @@ using Boardgame.Networking;
 using DemeoPlus.Core.Utilities;
 using DemeoPlus.Desktop.Utilities;
 using MelonLoader;
+using RGCommon;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DiscordApp = Discord;
@@ -100,7 +101,7 @@ namespace DemeoPlus.Desktop.Discord
                     {
                         if (_context.levelManager.GetCurrentGameType().Equals(LevelSequence.GameType.ElvenQueen))
                         {
-                            if (_activity.State != "Playing Adventure.")
+                            if (_activity.State.StartsWith("On "))
                             {
                                 _activity.Timestamps = new DiscordApp.ActivityTimestamps
                                 {
@@ -108,7 +109,7 @@ namespace DemeoPlus.Desktop.Discord
                                 };
                             }
                             _activity.Details = "Playing The Black Sarcophagus.";
-                            _activity.State = "Playing Adventure.";
+                            _activity.State = $"On {Locale.GetInstance().GetString($"Ui/levels/levelName/{sceneName}")}";
                             _activity.Assets.LargeImage = "book1";
                             _activity.Assets.LargeText = "Book 1 - The Black Sarcophagus";
                             _activity.Assets.SmallImage = "logo";
@@ -138,7 +139,7 @@ namespace DemeoPlus.Desktop.Discord
                             }
                         } else if (_context.levelManager.GetCurrentGameType().Equals(LevelSequence.GameType.RatKing))
                         {
-                            if (_activity.State != "Playing Adventure.")
+                            if (_activity.State.StartsWith("On "))
                             {
                                 _activity.Timestamps = new DiscordApp.ActivityTimestamps
                                 {
@@ -146,7 +147,7 @@ namespace DemeoPlus.Desktop.Discord
                                 };
                             }
                             _activity.Details = "Playing Realm of the Rat King.";
-                            _activity.State = "Playing Adventure.";
+                            _activity.State = $"On {Locale.GetInstance().GetString($"Ui/levels/levelName/{sceneName}")}";
                             _activity.Assets.LargeImage = "book2";
                             _activity.Assets.LargeText = "Book 2 - Realm of the Rat King";
                             _activity.Assets.SmallImage = "logo";
