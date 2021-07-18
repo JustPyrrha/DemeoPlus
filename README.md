@@ -16,7 +16,7 @@ DemeoPlus depends on MelonLoader v0.4.2, available [here](https://github.com/Lav
 - Core
    - Customizable In-game Clock
    
-- Steam
+- PC
   - Discord Integration (Formally DemeoDiscord)
     - Show current adventure
     - Show current party size
@@ -25,8 +25,12 @@ DemeoPlus depends on MelonLoader v0.4.2, available [here](https://github.com/Lav
 
 ## Planned Features
 See the [roadmap](https://github.com/JoeZwet/DemeoPlus/projects/1) for more details.
-- Core
-  - In-game config menus
+  - Core
+    - In-game config menus
+    - Feature Toggles
+  - PC
+    - Chat Display
+    - Fixed Camera
 
 ## Support
 For support, ping `@JoeZwet#0001` in the [Demeo Modding Group Discord server](https://discord.gg/XYphVbfaqh).
