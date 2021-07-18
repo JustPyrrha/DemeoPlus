@@ -28,9 +28,9 @@ See the [roadmap](https://github.com/JoeZwet/DemeoPlus/projects/1) for more deta
   - Core
     - In-game config menus
     - Feature Toggles
+    - Chat Display (Stream Tools)
   - PC
-    - Chat Display
-    - Fixed Camera
+    - Fixed Camera (Stream Tools)
 
 ## Support
 For support, ping `@JoeZwet#0001` in the [Demeo Modding Group Discord server](https://discord.gg/XYphVbfaqh).
