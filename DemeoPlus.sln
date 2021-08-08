@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemeoPlus.Desktop", "DemeoPlus.Desktop\DemeoPlus.Desktop.csproj", "{87837251-B455-4210-8048-791D96E2DD05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemeoPlus.Core", "DemeoPlus.Core\DemeoPlus.Core.csproj", "{20B9132B-EC86-44DE-8A36-939FDD61D852}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemeoPlus", "DemeoPlus\DemeoPlus.csproj", "{20B9132B-EC86-44DE-8A36-939FDD61D852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +8,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{87837251-B455-4210-8048-791D96E2DD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87837251-B455-4210-8048-791D96E2DD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87837251-B455-4210-8048-791D96E2DD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87837251-B455-4210-8048-791D96E2DD05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20B9132B-EC86-44DE-8A36-939FDD61D852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20B9132B-EC86-44DE-8A36-939FDD61D852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B9132B-EC86-44DE-8A36-939FDD61D852}.Release|Any CPU.ActiveCfg = Release|Any CPU

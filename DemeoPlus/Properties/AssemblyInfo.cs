@@ -1,24 +1,24 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using DemeoPlus.Desktop;
+using DemeoPlus;
 using MelonLoader;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DemeoPlus.Desktop")]
+[assembly: AssemblyTitle("DemeoPlus")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DemeoPlus.Desktop")]
+[assembly: AssemblyProduct("DemeoPlus")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Melon
-[assembly: MelonInfo(typeof(DemeoPlusDesktop), "DemeoPlus.Desktop", "0.4.0", "JoeZwet")]
+[assembly: MelonInfo(typeof(DemeoPlusMelon), "DemeoPlus", "0.4.0", "JoeZwet")]
 [assembly: MelonGame("Resolution Games", "Demeo")]
-[assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.WINDOWS_X64)]
+[assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.UNIVERSAL)]
 [assembly: MelonGameVersion("1.4.118643")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -27,7 +27,7 @@ using MelonLoader;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("87837251-B455-4210-8048-791D96E2DD05")]
+[assembly: Guid("20B9132B-EC86-44DE-8A36-939FDD61D852")]
 
 // Version information for an assembly consists of the following four values:
 //
